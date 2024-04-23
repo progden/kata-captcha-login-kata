@@ -22,15 +22,22 @@ class KataCaptchaLoingTests {
     private LoginResult loginResult;
     @Mock
     private CaptchaToken captchaToken;
+    @Mock
+    private ValidateUserPort validateUserPort;
 
     @Test
     void login_when_correct_then_redirect_to_home() {
         givenStoredUserAndCaptcha("user", "captcha");
+        givenValidateUserSuccess();
 
         login("user", "password", "captcha");
 
         // assert
         shouldRedirectTo("/home");
+    }
+
+    private void givenValidateUserSuccess() {
+        when(validateUserPort.validate("user", "password")).thenReturn(true);
     }
 
     @Test

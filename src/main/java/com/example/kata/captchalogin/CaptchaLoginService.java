@@ -2,9 +2,11 @@ package com.example.kata.captchalogin;
 
 public class CaptchaLoginService implements CaptchaLoginUseCase {
     private final CaptchaToken captureToken;
+    private final ValidateUserPort validateUser;
 
-    public CaptchaLoginService(CaptchaToken captchaToken) {
+    public CaptchaLoginService(CaptchaToken captchaToken, ValidateUserPort validateUserPort) {
         this.captureToken = captchaToken;
+        this.validateUser = validateUserPort;
     }
 
     @Override
