@@ -33,6 +33,16 @@ class KataCaptchaLoingTests {
         shouldRedirectTo("/home");
     }
 
+    @Test
+    void login_when_captcha_wrong_then_redirect_to_home() {
+        givenStoredUserAndCaptcha("user", "captcha");
+
+        login("user", "password", "wrong-captcha");
+
+        // assert
+        shouldRedirectTo("/login");
+    }
+
     private void givenStoredUserAndCaptcha(String user, String captcha) {
         when(captchaToken.getToken(user)).thenReturn(captcha);
     }
