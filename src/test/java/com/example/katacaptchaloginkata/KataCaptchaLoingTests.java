@@ -42,6 +42,7 @@ class KataCaptchaLoingTests {
             "wrong-user, password",
             "'', ''",
             "'', password",
+            "' ', password",
             "user, ''",
             ", ",
             "user, ",
