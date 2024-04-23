@@ -21,7 +21,7 @@ class KataCaptchaLoingTests {
     private CaptchaLoginService captchaLogin;
     private LoginResult loginResult;
     @Mock
-    private CaptchaToken captchaToken;
+    private CaptchaTokenPort captchaTokenPort;
     @Mock
     private ValidateUserPort validateUserPort;
 
@@ -84,7 +84,7 @@ class KataCaptchaLoingTests {
     }
 
     private void givenStoredUserAndCaptcha(String user, String captcha) {
-        when(captchaToken.getToken(user)).thenReturn(captcha);
+        when(captchaTokenPort.getToken(user)).thenReturn(captcha);
     }
 
     private void login(String user, String password, String captcha) {

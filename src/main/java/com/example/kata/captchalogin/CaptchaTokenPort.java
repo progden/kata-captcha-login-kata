@@ -1,5 +1,5 @@
 package com.example.kata.captchalogin;
 
-public interface CaptchaToken {
+public interface CaptchaTokenPort {
     String getToken(String user);
 }
