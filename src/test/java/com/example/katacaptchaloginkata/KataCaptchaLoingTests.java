@@ -34,7 +34,7 @@ class KataCaptchaLoingTests {
     }
 
     @Test
-    void login_when_captcha_wrong_then_redirect_to_home() {
+    void login_when_captcha_wrong_then_redirect_to_login() {
         givenStoredUserAndCaptcha("user", "captcha");
 
         login("user", "password", "wrong-captcha");
