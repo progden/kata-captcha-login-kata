@@ -39,7 +39,13 @@ class KataCaptchaLoingTests {
     @ParameterizedTest(name = "login with wrong login user:{0}, pass:{1}")
     @CsvSource({
             "user, wrong-password",
-            "wrong-user, password"
+            "wrong-user, password",
+            "'', ''",
+            "'', password",
+            "user, ''",
+            ", ",
+            "user, ",
+            ", password",
     })
     void login_when_wrong_login_then_redirect_to_login(String user, String pass) {
         givenStoredUserAndCaptcha("user", "captcha");
