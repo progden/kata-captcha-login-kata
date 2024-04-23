@@ -14,6 +14,9 @@ public class CaptchaLoginService implements CaptchaLoginUseCase {
         String userCaptcha = this.captureToken.getToken(user);
         if (!captcha.equals(userCaptcha))
             return new LoginResult("/login");
+        if (!this.validateUser.validate(user, password))
+            return new LoginResult("/login");
+
         return new LoginResult("/home");
     }
 }

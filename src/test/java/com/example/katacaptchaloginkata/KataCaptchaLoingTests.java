@@ -1,7 +1,6 @@
 package com.example.katacaptchaloginkata;
 
 import com.example.kata.captchalogin.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,7 +27,7 @@ class KataCaptchaLoingTests {
     @Test
     void login_when_correct_then_redirect_to_home() {
         givenStoredUserAndCaptcha("user", "captcha");
-        givenValidateUserSuccess();
+        givenValidateUserSuccess(true);
 
         login("user", "password", "captcha");
 
@@ -36,8 +35,19 @@ class KataCaptchaLoingTests {
         shouldRedirectTo("/home");
     }
 
-    private void givenValidateUserSuccess() {
-        when(validateUserPort.validate("user", "password")).thenReturn(true);
+    @Test
+    void login_when_validate_user_fail_then_redirect_to_login() {
+        givenStoredUserAndCaptcha("user", "captcha");
+        givenValidateUserSuccess(false);
+
+        login("user", "password", "captcha");
+
+        // assert
+        shouldRedirectTo("/login");
+    }
+
+    private void givenValidateUserSuccess(boolean isCorrectLogin) {
+        when(validateUserPort.validate("user", "password")).thenReturn(isCorrectLogin);
     }
 
     @Test
