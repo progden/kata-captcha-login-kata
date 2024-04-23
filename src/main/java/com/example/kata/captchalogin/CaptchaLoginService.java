@@ -10,12 +10,14 @@ public class CaptchaLoginService implements CaptchaLoginUseCase {
     }
 
     @Override
-    public LoginResult login(String user, String password, String captcha) {
-        
-        if (!captcha.equals(this.captureToken.getToken(user)))
+    public LoginResult login(String inputUser, String inputPass, String inputToken) {
+
+        String token = this.captureToken.getToken(inputUser);
+        if (!inputToken.equals(token))
             return new LoginResult("/login");
 
-        if (!this.validateUser.validate(user, password))
+        boolean isValidLogin = this.validateUser.validate(inputUser, inputPass);
+        if (!isValidLogin)
             return new LoginResult("/login");
 
         return new LoginResult("/home");
